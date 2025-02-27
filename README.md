@@ -1,6 +1,6 @@
 # telerilevamento_2025
-## ciao
+corso di telerilevamento
 
-# ciao
-+ a
-+ b
+linguaggi di programmazione
++ R
++ LaTeX
