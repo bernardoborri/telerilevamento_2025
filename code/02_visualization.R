@@ -96,3 +96,25 @@ plot(sentdol, col=mako(100))
 dev.off() #significa spegni il device, per far sparire il grafico creato
 
 im.multiframe(1,4)
+
+#Layers
+#1 = blue (b2)
+#2 = green (b3)
+#3 = red (b4)
+#4 = NIR (b8)
+
+#Natural colors
+im.plotRGB(sentdol, r=3, g=2, b=1)
+
+#False colors
+im.plotRGB(sentdol, r=4, g=3, b=2)
+
+#Exercise: plot the image using the NIR ontop of the green component of the RGB scheme
+im.plotRGB(sentdol, r=3, g=4, b=2)
+pairs (sentdol)
+#altro esempio col verde
+im.plotRGB(sentdol, r=2, g=4, b=3)
+dev.off()
+#con la banda del blu in primo piano
+im.plotRGB(sentdol, r=2, g=4, b=3)
+
