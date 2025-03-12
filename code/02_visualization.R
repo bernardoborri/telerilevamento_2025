@@ -116,5 +116,9 @@ pairs (sentdol)
 im.plotRGB(sentdol, r=2, g=4, b=3)
 dev.off()
 #con la banda del blu in primo piano
-im.plotRGB(sentdol, r=2, g=4, b=3)
+im.plotRGB(sentdol, r=3, g=2, b=4)
 
+#plot usando il comando multiframe
+im.multiframe(1,2)
+im.plotRGB(sentdol, r=2, g=4, b=3)
+im.plotRGB(sentdol, r=3, g=4, b=1)
