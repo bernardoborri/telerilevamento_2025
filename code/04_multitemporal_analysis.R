@@ -78,6 +78,11 @@ pdf(difgreen.pdf")
 plot(grdif)
 dev.off()
 
+#esporto in formato jpeg
+jpeg("difgreen.jpeg")
+plot(grdif)
+dev.off()
+
 #il pdf non perde definizione zoomando
 
 
