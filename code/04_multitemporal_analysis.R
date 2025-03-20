@@ -1,8 +1,10 @@
 # R code for performing multitemporal analysis
 
+install.packages("ggridges") #servirà per creare ridgeline plots
 library(terra)
 library(imageRy)
 library(viridis)
+library(ggridges)
 
 #apro la lista tramite il comando im.list
 im.list()
@@ -55,9 +57,51 @@ plot(grdif)
 #il path riporterà una scritta simile a C:\Users\bobby\OneDrive\Desktop
 #bisogna cambiare la direzione degli slash nel comando come segue
 
+#avendo già importato le 4 immagini "greenland" adesso uso una funzione per utilizzare i Ridgeline plots, secondo l'apposita funzione
+#questa funzione è ottenibile soltanto dal pacchetto "ggridges", dunque lo installo (ma va in cima a questo file il relativo comando, perché i pacchetti nei codici si scrivono in cima!)
+#Ridgeline plots
+im.ridgeline(gr, scale=1)
+#adesso vado a cambiare il parametro di scala 
+im.ridgeline(gr, scale=2)
+im.ridgeline(gr, scale=3)
 
+#i seguenti coamandi mi forniscono informazioni sul grafico
+?im.ridgeline
+im.ridgeline
 
+#gli cambio colore con una legenda dal pacchetto viridis
+im.ridgeline(gr, scale=2, palette="inferno")
 
+#abbiamo visto un set pluriennale, guardiamo un'altro tipo di set da im.list()
+#importo le immagini Sentinel2_NDVI e gli do nome "ndvi"
 
+im.list()
+ndvi = im.import("Sentinel2_NDVI")
+im.ridgeline(ndvi, scale=1)
 
+#cambiare il nome dei layers del dataset, perché altrimenti scrivendo solo NDVI creo un solo grafico (si chiamano tutti NDVI)
+#changing names
+#sources "Sentinel2_NDVI_2020-02-21.tif"                     
+#sources "Sentinel2_NDVI_2020-05-21.tif"                     
+#sources "Sentinel2_NDVI_2020-08-01.tif"                     
+#sources "Sentinel2_NDVI_2020-11-27.tif" 
+
+#uso il comando "pairs" per confrontare i vari set di dati, di seguito i comandi per ottenere i dati di febbraio e di maggio
+pairs(ndvi)
+plot(ndvi[[1]], ndvi[[2]])
+
+#creo una linea 1:1 dove i dati di febbraio e maggio risultino uguali, tramite la seguente funzione
+# y = x # may y, feb x
+# y = a + bx
+# a=0, b=1
+# y = a + bx = 0 + 1x = x
+
+plot(ndvi[[1]], ndvi[[2]], xlim=c(0.3,0.9), ylim(-0.3, 0.9))
+abline(0, 1, col=red)
+
+#faccio un multiframe
+im.multiframe(1,3)
+plot(ndvi[[1]])
+plot(ndvi[[1]])
+plot(ndvi[[1]])
 
