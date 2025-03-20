@@ -15,7 +15,7 @@ grdif = gr[[1]] - gr[[4]]
 ``` 
 
 the output will be something like (i 2 puntini iniziali e lo slash servono per salire di livello):
-<img src="../Pics/difgreen.jpeg" width=100%/>
+<img src="../Pics/greenland_output.png" width=100%/>
 #se voglio l'immagine grande, ad esempio, la metà, scriverò 50% anziché 100%
 
 >Note: information on the Copernicus program che be find at the [Copernicus_page](https://www.copernicus.eu/en)
