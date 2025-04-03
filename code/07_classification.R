@@ -65,6 +65,58 @@ p00 = im.ggplot(mato2006)
 # Metto i 4 grafici tutti uno accanto all'altro
 p0 + p00 + p1 + p2
 
+# Solar orbiter (missione da parte di ESA per il sole)
+
+im.list()
+solar = im.import("Solar_Orbiter_s_first_views_of_the_Sun_pillars.jpg")
+# Esercizio: usa la funzione im.classify() per dividere questa immagine in 3 classi 
+solar2006c = im.classify(solar, num_clusters=3)
+# Esercizio: plotta l'immagine classificata, creata nel precedente esercizio, assieme all'originale
+im.multiframe(1,2)
+plot(solar)
+plot(solar2006c)
+
+# Ora voglio dare un nome alle 3 classi
+# 3 = high
+# 1 = low
+# 2 = medium
+
+# Esiste una funzione del pacchetto terra per cambiare i numeri in nomi
+solarcs = subst(solar2006c, c(3,1,2), c("c1_low","c2_medium","c3_high"))
+plot(solarcs)
+
+# Esercizio: calcola le percentuali delle classi dell'energia del sole con una sola linea di codice
+
+# Frequenza di quante volte ho un dato valore
+percsolar = freq(solarcs)$count * 100 / ncell(solarcs)
+
+# ricavo le seguenti percentuali digitando su R "percsolar" dopo la suddetta funzione
+41.44658 21.21993 37.33349
+
+#approssimo come segue
+41 21 38
+
+# Faccio il dataframe
+class = c (("c1_low,"c2_medium","c3_high")
+perc = c(41,21,38)
+tabsol = data.frame(class, perc)
+
+# Creo ora un grafico con ggplot
+ggplot(tabsol, aes(x=class, y=perc, fill=class, color=class)) + geom_bar(stat=identity) + 
+# ylim(c(0,100))
+
+# Giro il grafico
+coord_flip()
+# + scale_y_reverse()
+
+
+
+
+
+
+
+
+
 
 
 
