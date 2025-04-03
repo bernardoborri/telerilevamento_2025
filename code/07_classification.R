@@ -25,6 +25,7 @@ mato2006c = im.classify(mato2006, num_clusters=2)
 
 # Frequenza di quante volte ho un dato valore
 f1992 = freq(mato1992c)
+
 # poi da qui seleziono i dati con cui ottenere le proporzioni                            
 tot1992 = ncell(mato1992c)
 prop1992 = f1992 / tot1992
@@ -34,8 +35,6 @@ perc1992 = prop1992 * 100
 
 tot2006 = ncell(mato2006c)
 perc2006 = freq(mato2006c) * 100 / tot2006
-
-#human = 54%, forest = 45%
 
 # Creating dataframe
 class = c("Forest", "Human")
