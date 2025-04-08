@@ -47,7 +47,7 @@ p1 = ggplot(tabout, aes(x=class, y=y1992, color=class)) + geom_bar(stat="identit
 
 p2 = ggplot(tabout, aes(x=class, y=y2006, color=class)) + geom_bar(stat="identity", fill="white")+ ylim(c(0,100))
 
-# Accosto i 2 grafici, anziché utilizzando multiframe o altro, utilizzo il la funzione "patchwork" del pacchetto omonimo, che è la seguente
+# Accosto i 2 grafici, anziché utilizzando multiframe o altro, utilizzo una funzione del pacchetto patchwork, che è la seguente
 p1 = ggplot(tabout, aes(x=class, y=y1992, color=class)) + geom_bar(stat="identity", fill="white") + ylim(c(0,100))
 
 p2 = ggplot(tabout, aes(x=class, y=y2006, color=class)) + geom_bar(stat="identity", fill="white")+ ylim(c(0,100))
@@ -59,11 +59,32 @@ p00 = im.ggplot(mato2006)
 p1 + p2
 p1 / p2
 
+#Uso la funzione di imageRy "im.ggplot"
 p0 = im.ggplot(mato1992)
 p00 = im.ggplot(mato2006)
 
 # Metto i 4 grafici tutti uno accanto all'altro
 p0 + p00 + p1 + p2
+
+# Coloring bars
+
+ggplot(tabout, aes(x=class, y=y2006, fill=class, color=class)) + 
+  geom_bar(stat="identity") + 
+  ylim(c(0,100))
+
+# https://www.sthda.com/english/wiki/ggplot2-barplots-quick-start-guide-r-software-and-data-visualization
+
+# Horizontal bars
+
+p1 = ggplot(tabout, aes(x=class, y=y1992, color=class)) +
+  geom_bar(stat="identity", fill="white") +
+  ylim(c(0,100)) +
+  coord_flip()
+
+p2 = ggplot(tabout, aes(x=class, y=y2006, color=class)) +
+  geom_bar(stat="identity", fill="white") +
+  ylim(c(0,100)) +
+  coord_flip()
 
 # Solar orbiter (missione da parte di ESA per il sole)
 
