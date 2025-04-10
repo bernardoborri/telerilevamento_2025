@@ -16,14 +16,14 @@ m (23+22+23+49) / 4
 
 # Deviazione standard = quanto si scosta il dato dalla media
 (23-29.5)^2 + (22-29.5)^2 + (23-29.5)^2 + (49-29.5)^2 
-den = 4
+den = 4 - 1
 # Ho estratto la somma di tutti gli scarti quadratici
 
 variance = num / den
 stdev = sqrt(variance)
 
 # Deviazione standard finale
-#stdev = 11.41271
+#stdev = 13.1751
 
 # Provo ad escludere dal gruppo il dato più grande per vedere come varia la deviazione standard
 sd(c(23, 22, 23))
@@ -81,4 +81,78 @@ p1 + p2
 p3 = ggRGB(sent, r=1, g=2, b=3)
 p1 + p2 + p3
 p3 + p1 + p2
+
+# Cosa fare in caso di immagini molto grandi
+ncell(sent) * nlyr(sent)
+
+# 794 * 798
+# 2534448
+
+# Uso la funzione aggregate e gli do nome "senta"
+senta = aggregate(sent, fact=2)
+#risultato 633612
+
+# poi digito "senta" e vedo cosa è cambiato nella risoluzione e altro
+
+# proviamo con fattore 5
+senta5 = aggregate(sent, fact=5)
+ncell(senta5) * nlyr(senta5)
+#risultato 101760
+
+# Uso la funzione "focal" del pacchetto terra per ottenere la deviazione standard
+nira = senta[[1]]
+sd3a = focal(nira, w=c(3,3) fun=sd)
+
+#Esercizio: fai un multiframe e plotta in RGB le 3 immagini (originale, fattore 2, fattore 5)
+im.multiframe(1,3)
+im.plotRGB(sent, 1, 2, 3)
+im.plotRGB(senta, 1, 2, 3)
+im.plotRGB(senta5, 1, 2, 3)
+
+# Deviazione standard dell'immagine con fattore 2
+nira = senta[[1]]
+sd3a = focal(nira, w=c(3,3) fun=sd)
+
+# Esercizio: calcola la deviazione standard con fattore 5
+nira5 = senta5[[1]]
+sd3a5 = focal(nira5, w=c(5,5) fun=sd)
+plot(sd5a5)
+
+# Multiframe per confronto
+im.multiframe(2,2)
+plot(sd3) 
+plot(sd3a) 
+plot(sd3a5) 
+plot(sd5a5) 
+
+# Ora lo faccio con ggplot e per questo mi serve il pacchetto patchwork e anche eventualmente viridis per scegliere il colore
+im.multiframe(2,2)
+p1 = im.ggplot(sd3, col=inferno(100))
+p2 = im.ggplot(sd3a, col=inferno(100))
+p3 = im.ggplot(sd3a5, col=inferno(100))
+p4 = im.ggplot(sd5a5, col=inferno(100))
+
+p1 + p2 + p3 + p4
+
+# Calcolo della varianza
+nir = sent[[1]]
+var3 = sd3^2
+
+im.multiframe(1,2)
+plot(sd3)
+plot(var3)
+sd5 = focal(nir, w=c(5,5), fun="sd")
+var5 = sd5^2
+
+
+
+
+
+
+
+
+
+
+
+
 
