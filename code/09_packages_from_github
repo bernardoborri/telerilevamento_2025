@@ -1,0 +1,13 @@
+# R code for installing packages from GitHub
+
+# da GitHub
+# install.packages
+library(devtools) # or remotes
+install_github("ducciorocchini/cblindplot")
+library(cblindplot)
+
+install_github("clauswilke/colorblindr")
+library(colorblindr)
+
+# Da CRAN
+install.packages
