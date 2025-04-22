@@ -15,15 +15,17 @@ m (23+22+23+49) / 4
 # m = 29.25
 
 # Deviazione standard = quanto si scosta il dato dalla media
-(23-29.5)^2 + (22-29.5)^2 + (23-29.5)^2 + (49-29.5)^2 
+(23-29.5)^2 + (22-29.5)^2 + (23-29.5)^2 + (49-29.5)^2 = 521 = num
 den = 4 - 1
-# Ho estratto la somma di tutti gli scarti quadratici
 
-variance = num / den
+# Ho estratto la somma di tutti gli scarti quadratici e gli ho dato nome "num" (numeratore) mentre "den" è il denominatore
+# num / den mi da la varianza
+
+variance = num / den = 521/4 -1 = 173,66
 stdev = sqrt(variance)
 
 # Deviazione standard finale
-#stdev = 13.1751
+#stdev √173,66 = 13.17
 
 # Provo ad escludere dal gruppo il dato più grande per vedere come varia la deviazione standard
 sd(c(23, 22, 23))
