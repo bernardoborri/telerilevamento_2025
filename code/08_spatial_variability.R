@@ -59,7 +59,7 @@ plot(nir)
 plot(nir, col=inferno(100))
 
 # Uso la funzione "focal" del pacchetto terra per ottenere la deviazione standard
-sd3 = focal(nir, w=c(3,3) fun=sd)
+sd3 = focal(nir, w=c(3,3), fun=sd)
 plot(sd3)
 
 # Adesso plotto una accanto all’altra l’immagine originale e quella con la deviazione standard
@@ -68,7 +68,7 @@ im.plotRGB(sent, r=1, g=2, b=3)
 plot(sd3)
 
 # Esercizio: fare la stessa cosa con una finestra di 5 x 5 anziché 3 x 3:
-sd5 = focal(nir, w=c(5,5) fun=sd)
+sd5 = focal(nir, w=c(5,5), fun=sd)
 plot(sd5)
 
 # Esercizio: usa il pacchetto ggplot per plottare la deviazione standard
