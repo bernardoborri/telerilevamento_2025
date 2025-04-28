@@ -1,13 +1,17 @@
 # R code for installing packages from GitHub
 
-# da GitHub
-# install.packages
-library(devtools) # or remotes
+# dapprima mi serve il pacchetto devtools
+install.packages("devtools")
+library(devtools) 
+# or remotes (un'altro pacchetto analogo)
+
+# From GitHub
 install_github("ducciorocchini/cblindplot")
 library(cblindplot)
 
 install_github("clauswilke/colorblindr")
 library(colorblindr)
 
-# Da CRAN
-install.packages
+# From CRAN:
+install.packages("colorblindcheck")
+library(colorblindcheck)
