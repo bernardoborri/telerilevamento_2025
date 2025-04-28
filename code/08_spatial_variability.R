@@ -148,9 +148,11 @@ var3 = sd3^2
 im.multiframe(1,2)
 plot(sd3)
 plot(var3)
+
 sd5 = focal(nir, w=c(5,5), fun="sd")
 var5 = sd5^2
-
+plot(sd5)
+plot(var5)
 
 
 
