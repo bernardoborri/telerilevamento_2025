@@ -84,26 +84,24 @@ p3 = ggRGB(sent, r=1, g=2, b=3)
 p1 + p2 + p3
 p3 + p1 + p2
 
-# Cosa fare in caso di immagini molto grandi
+# Cosa fare in caso di immagini molto grandi: si usa la funzione ncell che moltiplica le righe per le colonne
 ncell(sent) * nlyr(sent)
 
-# 794 * 798
+#794 (righe) * 798 (colonne)
 # 2534448
 
-# Uso la funzione aggregate e gli do nome "senta"
+# Uso la funzione aggregate per avere meno pixel e gli do nome "senta"
 senta = aggregate(sent, fact=2)
-#risultato 633612
 
 # poi digito "senta" e vedo cosa è cambiato nella risoluzione e altro
+# A questo punto riutilizzando la funzione ncell vedrò che il numero di pixel è diminuito quanto atteso
+ncell(senta) * nlyr(senta)
+# 633612
 
 # proviamo con fattore 5
 senta5 = aggregate(sent, fact=5)
 ncell(senta5) * nlyr(senta5)
 #risultato 101760
-
-# Uso la funzione "focal" del pacchetto terra per ottenere la deviazione standard
-nira = senta[[1]]
-sd3a = focal(nira, w=c(3,3) fun=sd)
 
 #Esercizio: fai un multiframe e plotta in RGB le 3 immagini (originale, fattore 2, fattore 5)
 im.multiframe(1,3)
@@ -113,11 +111,11 @@ im.plotRGB(senta5, 1, 2, 3)
 
 # Deviazione standard dell'immagine con fattore 2
 nira = senta[[1]]
-sd3a = focal(nira, w=c(3,3) fun=sd)
+sd3a = focal(nira, w=c(3,3) fun="sd")
 
 # Esercizio: calcola la deviazione standard con fattore 5
 nira5 = senta5[[1]]
-sd3a5 = focal(nira5, w=c(5,5) fun=sd)
+sd3a5 = focal(nira5, w=c(5,5) fun="sd")
 plot(sd5a5)
 
 # Multiframe per confronto
@@ -129,12 +127,19 @@ plot(sd5a5)
 
 # Ora lo faccio con ggplot e per questo mi serve il pacchetto patchwork e anche eventualmente viridis per scegliere il colore
 im.multiframe(2,2)
-p1 = im.ggplot(sd3, col=inferno(100))
-p2 = im.ggplot(sd3a, col=inferno(100))
-p3 = im.ggplot(sd3a5, col=inferno(100))
-p4 = im.ggplot(sd5a5, col=inferno(100))
+p1 = im.ggplot(sd3)
+p2 = im.ggplot(sd3a)
+p3 = im.ggplot(sd3a5)
+p4 = im.ggplot(sd5a5)
 
 p1 + p2 + p3 + p4
+
+#Lo faccio con multiframe ed una scala di colori dal pacchetto viridis:
+im.multiframe(2,2)
+plot(sd3, col=mako(100))
+plot(sd3a, col=mako(100))
+plot(sd3a5, col=mako(100))
+plot(sd5a5, col=mako(100))
 
 # Calcolo della varianza
 nir = sent[[1]]
