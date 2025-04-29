@@ -2,3 +2,4 @@
 
 
 A graphical sketch is the following:
+<img src="../Pics/PCA.png"/>
