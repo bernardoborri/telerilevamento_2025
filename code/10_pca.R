@@ -1,13 +1,13 @@
 # R code for Principal Component Analysis
 
 library(imageRy)
-library(terra
+library(terra)
 
 im.list()
 
 sent = im.import("sentinel.png")
 sent = flip(sent)
-plot(sent
+plot(sent)
 
 sent = c(sent[[1]],sent[[2]],sent[[3]])
 
