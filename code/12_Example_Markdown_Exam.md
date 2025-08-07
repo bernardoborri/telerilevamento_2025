@@ -1,6 +1,7 @@
 # Presentation title
 ## Data gathering
 Data were gathered from the [earth observatory site](https://earthobservatory.nasa.gov/)
+
 Packages used:
 ``` r
 library (terra)
