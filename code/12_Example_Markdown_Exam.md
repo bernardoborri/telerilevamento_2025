@@ -9,9 +9,13 @@ library (imageRy)
 ```
 Setting the working directory and importing the data
 ``` r
-setwd("~/Desktop/") #for windows users change the backslash \ to slash /
+setwd("~/Desktop/")
+# per windows è necessario cambiare il backslash \ in slash /
+# si consideri che questo comando può cambiare notevolmente e quindi è meglio verififare il "path", per il mio pc è stato per esempio il seguente: setwd ("C:/Users/bobby/OneDrive/Desktop")
 dust = rast("dust.jpg")
+# a questo punto potrebbe apparire il seguente messaggio di avvertimento su R: Messaggio di avvertimento:[rast] unknown extent, ma noi proseguiremo plottando l'immagine col comando di seguito e la visualizzeremo comunque
 plot(dust)
+# dopodiché se eventualmente fosse girata la flipperemo col comando di seguito e ripeteremo il plot
 dust = flip(dust)
 plot(dust)
 ```
@@ -20,19 +24,21 @@ The image looks like:
 ![dust](https://github.com/user-attachments/assets/a8328350-1608-41bf-86e2-dfd9d8375276)
 
 # Data analysis
-Based on the data gathered we can calculate the index:
-``` r
-dust index = dust [[1]] - dust [[3]]
-plot(dustindex)
-```
-# Correlations of bands
-Based on the data gathered, we can calculated the following index:
+Basandoci sui dati ottenuti possiamo calcolare il seguente indice:
 
 ``` r
 dustindex = dust[[1]]- dust[[3]]
 plot(dustindex)
+# trattandosi di due bande molto vicine non avrò ovviamente un'immagine granché eloquente...
 ```
-The output image is the following:
+Per esportare l'indice, possiamo utilizzare la funzione png() come di seguito:
+
+``` r
+png("dustindex.png")
+plot(dustindex)
+dev.off()
+```
+Output image is the following:
 
 ![dustindex](https://github.com/user-attachments/assets/1d99d740-0f43-4f7a-b50f-a0ddb78321fe)
 
