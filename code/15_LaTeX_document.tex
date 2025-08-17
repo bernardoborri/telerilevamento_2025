@@ -1,0 +1,77 @@
+Qui per i commenti, essendo in linguaggio LaTeX e non in linguaggio R, usiamo il simbolo % anziché #
+Qui le funzioni iniziano col backslash e gli argomenti sono tra parentesi graffe
+\documentclass[12pt]{article} % con le parentesi quadre cambio la struttura, in questo caso la dimensione dei caratteri
+\usepackage{graphicx} % pacchetto necessario per inserire immagini nel mio documento su Overleaf
+\usepackage{hyperref}
+\usepackage{natbib}
+\usepackage{float}
+
+\usepackage{lineno}
+\linenumbers
+
+% esempio: questo è un commento
+\title{Il mio primo documento con LaTeX}
+\author{borri.pachypus}
+% \date{}
+
+\begin{document} % ovunque si usi la funzione "begin" serve chiudere alla fine con la funzione "end" altrimenti da errore!
+
+\maketitle
+
+\tableofcontents
+
+\section{Introduction} \label{sec:intro}
+[Testo di "Muscolo rosso"]
+
+[Strofa 1]
+Dopo le mie trasgressioni
+Dopo tutte queste emozioni
+Nessuno mi può fermare
+Non mi potete arrestare
+
+[Strofa 2]
+Selvaggio animale in calore
+Il cazzo che mi spruzza nel cuore
+Un muscolo rosso d'amore
+Affonda lungo il mio cuore
+
+[Pre-Ritornello]
+Tu, che sembri un manichino
+Tira fuori il cazzo duro
+Ti faccio un pompino
+Io ti faccio un pompino, oh
+
+[Ritornello]
+Voglio il cazzo
+Vestita di pelle
+Il cazzo
+Più duro del muro
+Il cazzo
+Nel buco del culo
+Il cazzo che mi sfonderà, ah
+Insieme a me schizzerà
+Voglio il cazzo
+Vestita di pelle
+Il cazzo
+Più duro del muro
+Il cazzo
+Nel buco del culo
+Il cazzo che mi sfonderà, ah
+Insieme a me schizzerà
+In mio potere sarà
+
+\section{Methods} 
+% qui, per esempio, ci metto un'equazione a caso (gravità) e per illustrarla 
+cerco sul web le funzioni necessarie ad inserire le operazioni matematiche, facilmente reperibili
+In this paper we relied on Equation \ref{eq:newton}:
+
+\begin{equation}
+F = G \times \frac{m_1 \times m_2}{d^2}
+\label{eq:newton}
+\end{equation}
+
+The equation has then been changed to Equation 2:
+
+\begin{equation}
+F = \sqrt{\sum_{i=1}^{N} G \times \frac{\sqrt{m_1 \times \sqrt{m_2}}}{d^{\sqrt[3]{2}}}}
+\end{equation}
