@@ -27,7 +27,7 @@ The image looks like:
 Basandoci sui dati ottenuti possiamo calcolare il seguente indice:
 
 ``` r
-dustindex = dust[[1]]- dust[[3]]
+dustindex=dust[[1]]-dust[[3]]
 plot(dustindex)
 # trattandosi di due bande molto vicine non avrò ovviamente un'immagine granché eloquente...
 ```
