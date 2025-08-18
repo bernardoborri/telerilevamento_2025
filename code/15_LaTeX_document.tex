@@ -2,11 +2,10 @@ Qui per i commenti, essendo in linguaggio LaTeX e non in linguaggio R, usiamo il
 Qui le funzioni iniziano col backslash e gli argomenti sono tra parentesi graffe
 \documentclass[12pt]{article} % con le parentesi quadre cambio la struttura, in questo caso la dimensione dei caratteri
 \usepackage{graphicx} % pacchetto necessario per inserire immagini nel mio documento su Overleaf
-\usepackage{hyperref}
-\usepackage{natbib}
-\usepackage{float}
-
-\usepackage{lineno}
+\usepackage{hyperref} % pacchetto necessario per inserire dei collegamenti tra diversi punti del documento
+\usepackage{float} % pacchetto necessario a mettere le immagini esattamente dove le voglio io e non dove vuole LaTeX
+\usepackage{natbib} % pacchetto necessario ad inserire una bibliografia alla fine del mio documento
+\usepackage{lineno} % pacchetto necessario  ad aggiungere dei numeri di riga (necessari per esempio ad un revisore di un articolo per indicare dove c'è un errore)
 \linenumbers
 
 % esempio: questo è un commento
@@ -21,6 +20,9 @@ Qui le funzioni iniziano col backslash e gli argomenti sono tra parentesi graffe
 \tableofcontents
 
 \section{Introduction} \label{sec:intro}
+% uso la funzione "label" per poter richiamare l'introduzione nei paragrafi successivi
+% inserisco il testo di una canzone per mettere una roba esemplificativa nell'introduzione
+% scelgo il brano della grande artista Cicciolina dal titolo "Muscolo rosso"
 [Testo di "Muscolo rosso"]
 
 [Strofa 1]
@@ -61,8 +63,8 @@ Insieme a me schizzerà
 In mio potere sarà
 
 \section{Methods} 
-% qui, per esempio, ci metto un'equazione a caso (gravità) e per illustrarla 
-cerco sul web le funzioni necessarie ad inserire le operazioni matematiche, facilmente reperibili
+% qui, per esempio, ci metto un'equazione a caso (gravità) 
+% per illustrarla cerco sul web le funzioni necessarie ad inserire le operazioni matematiche, facilmente reperibili
 In this paper we relied on Equation \ref{eq:newton}:
 
 \begin{equation}
@@ -75,3 +77,30 @@ The equation has then been changed to Equation 2:
 \begin{equation}
 F = \sqrt{\sum_{i=1}^{N} G \times \frac{\sqrt{m_1 \times \sqrt{m_2}}}{d^{\sqrt[3]{2}}}}
 \end{equation}
+
+All of this according to what we said in section \ref{sec:intro}.
+% ho qua sopra richiamato con la funzione "label" l'intoduzione
+
+\section{Results}
+
+% con l'insieme di funzioni qua sotto inserisco un'immagine, la centro, ne determino la misura e gli faccio comparire una descrizione sotto
+% gli ho anche dato un'etichetta con la già vista funzione "label"
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{ggplot.png}
+    \caption{Output graph of the analysis showing a temporal trend.}
+    \label{fig:temporal}
+\end{figure}
+
+\begin{thebibliography}{999}
+
+\bibitem[Cramieri et al. (2020)]{cramieri}
+Crameri, F., Shephard, G. E., \& Heron, P. J. (2020). The misuse of colour in science communication. Nature communications, 11, 5444.
+
+\bibitem[Chabreck \& Joanen (1979)]{alligator}
+Chabreck, R. H., \& Joanen, T. (1979). Growth rates of American alligators in Louisiana. Herpetologica, 51-57.
+
+\end{thebibliography}
+
+\end{document}
