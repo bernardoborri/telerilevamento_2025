@@ -114,13 +114,14 @@ Export.image.toDrive({
   crs: 'EPSG:4326',
   maxPixels: 1e13
 });
+```
 
-## **Script R — Analisi NDVI e visualizzazioni**
+## **2. Script R — Analisi NDVI e visualizzazioni**
 
-r
-Copia codice
+```r
+
 # ----------------------------
-# 2.1 Caricamento pacchetti (tutti dal file Lezioni Rocchini)
+# 2.1 Caricamento pacchetti 
 # ----------------------------
 library(imageRy)   # imageRy::im.plot()
 library(terra)     # terra::rast(), terra::values(), terra::plot()
@@ -195,16 +196,11 @@ ggplot(df_ndvi, aes(x=NDVI, fill=Anno)) +      # ggplot2::ggplot()
   labs(title="Distribuzione NDVI Toscana (2000,2010,2020)",
        x="NDVI", y="Densità") +
   theme_minimal()                             # ggplot2::theme_minimal()
-3. Conclusioni
-Lo script GEE esporta RGB+NIR per ogni anno.
+```
 
-L’NDVI viene calcolato solo in R (come nel documento Lezioni Rocchini).
 
-Le analisi statistiche e grafiche rispettano fedelmente i metodi del corso.
-
-4. LaTeX per Overleaf (facoltativo)
-latex
-Copia codice
+## **3. Script LaTeX per presentazione su Overleaf**
+```latex
 \documentclass{beamer}
 \usepackage{graphicx}
 \usetheme{Madrid}
@@ -232,3 +228,4 @@ Copia codice
 \end{frame}
 
 \end{document}
+```
