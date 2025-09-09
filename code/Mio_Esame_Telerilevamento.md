@@ -10,7 +10,7 @@
 // IMMAGINI RGB TOSCANA - 2000, 2010, 2020 
 // =====================================================
 
-// 1. Definisci l'area di interesse (AOI)
+// 1. Definisco l'area di interesse (AOI)
 // Ritaglio il perimetro della Toscana con lo strumento Geometry e lo chiamo aoi (Area of interest)
 var aoi = aoi;
 
