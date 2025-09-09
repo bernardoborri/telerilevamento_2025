@@ -75,6 +75,7 @@ Map.addLayer(
   'RGB Toscana 2020'
 );
 
+
 // ----------------------------------------------------
 // ESPORTAZIONE IMMAGINI RGB + NIR PER POTER CALCOLARE POI NDVI IN R
 // ----------------------------------------------------
@@ -115,6 +116,7 @@ Export.image.toDrive({
   maxPixels: 1e13
 });
 ```
+<img width="1914" height="865" alt="gee exam" src="https://github.com/user-attachments/assets/7d75d080-c6b0-4ad0-ab28-44e10b4b9692" />
 
 ## **2. Script R — Analisi NDVI e visualizzazioni**
 
@@ -131,6 +133,8 @@ library(ggplot2)   # ggplot2::ggplot(), geom_density(), theme_minimal()
 # ----------------------------
 # 2.2 Importazione immagini RGB+NIR (terra::rast)
 # ----------------------------
+getwd() # per verificare dapprima la working directory dove vanno spostate le immagini
+"C:/Users/bobby/OneDrive/Documents" # nel mio caso
 toscana_2000 <- rast("rgbn_tuscany_2000_1999_2001.tif")  # terra::rast()
 toscana_2010 <- rast("rgbn_tuscany_2010_2009_2011.tif")  # terra::rast()
 toscana_2020 <- rast("rgbn_tuscany_2020_2019_2021.tif")  # terra::rast()
@@ -145,7 +149,10 @@ plotRGB(toscana_2010, r=1, g=2, b=3, stretch="lin")
 title("RGB Toscana 2010")
 plotRGB(toscana_2020, r=1, g=2, b=3, stretch="lin")
 title("RGB Toscana 2020")
+```
+<img width="1400" height="698" alt="toscana paar" src="https://github.com/user-attachments/assets/3c39f0e9-a6e8-4a90-8367-b85f44d9d8cb" />
 
+```r
 # ----------------------------
 # 2.4 Calcolo NDVI in R (terra::)
 # Landsat 5 (2000, 2010): banda NIR = SR_B4 (4° banda export)
@@ -162,7 +169,10 @@ par(mfrow = c(1,3))                                # base::par()
 plot(ndvi_2000, col=viridis(100), main="NDVI 2000") # terra::plot(), viridis::viridis()
 plot(ndvi_2010, col=viridis(100), main="NDVI 2010")
 plot(ndvi_2020, col=viridis(100), main="NDVI 2020")
+```
+<img width="1018" height="457" alt="ndvi" src="https://github.com/user-attachments/assets/29be7530-1685-406e-b85b-ca25881823b2" />
 
+```r
 # ----------------------------
 # 2.6 Estrazione valori NDVI (terra::values, base::is.na)
 # ----------------------------
