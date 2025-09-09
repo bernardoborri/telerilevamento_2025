@@ -333,7 +333,7 @@ im.multiframe(class_2000, class_2010, class_2020,
 
 ## **3. Script LaTeX per presentazione su Overleaf**
 
-[Apri la mia presentazione LaTeX su Overleaf](https://www.overleaf.com/project/68c069dce98c3ff6c016a54e)
+[Clicca qui per aprire la mia presentazione LaTeX su Overleaf](https://www.overleaf.com/project/68c069dce98c3ff6c016a54e)
 
 ```latex
 \documentclass{beamer}
