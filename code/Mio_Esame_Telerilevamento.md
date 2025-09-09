@@ -334,9 +334,20 @@ im.multiframe(class_2000, class_2010, class_2020,
 ## **3. Script LaTeX per presentazione su Overleaf**
 ```latex
 \documentclass{beamer}
+\usetheme{Berlin} % tema che evita gli Overfull visti con Madrid
+
+% codifica e font
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+% grafica e link
 \usepackage{graphicx}
 \usepackage{hyperref}
-\usetheme{Madrid}
+
+% Macro robusta per visualizzare nomi di funzioni, pacchetti, nomi di file, ecc.
+% \detokenize stampa i caratteri speciali come testo, evitando che TeX li interpreti.
+\newcommand{\code}[1]{\texttt{\detokenize{#1}}}
 
 \title{Copertura Vegetazione Toscana (2000 -- 2020)}
 \author{Bernardo Borri}
@@ -355,8 +366,8 @@ im.multiframe(class_2000, class_2010, class_2020,
 \begin{frame}{Obiettivi del lavoro}
 \begin{itemize}
     \item Analizzare la variazione della copertura vegetale in Toscana tra il 2000, 2010 e 2020.
-    \item Utilizzare immagini satellitari Landsat scaricate da Google Earth Engine (GEE).
-    \item Calcolare l'indice di vegetazione NDVI in R.
+    \item Utilizzare immagini satellitari Landsat scaricate da \code{Google Earth Engine (GEE)}.
+    \item Calcolare l'indice di vegetazione \code{NDVI} in R.
     \item Visualizzare i cambiamenti tramite mappe RGB, NDVI e grafici statistici.
 \end{itemize}
 \end{frame}
@@ -364,32 +375,32 @@ im.multiframe(class_2000, class_2010, class_2020,
 % --------------------------------------
 % SLIDE 3 - FUNZIONI USATE IN GEE
 % --------------------------------------
-\begin{frame}{Funzioni principali di Google Earth Engine (GEE)}
+\begin{frame}[fragile]{Funzioni principali di Google Earth Engine (GEE)}
 \begin{itemize}
-    \item \textbf{ee.ImageCollection()} -- Carica le immagini satellitari Landsat.
-    \item \textbf{filterDate()} -- Seleziona un intervallo temporale di acquisizione.
-    \item \textbf{filterBounds()} -- Ritaglia l'area di interesse (AOI, Toscana).
-    \item \textbf{map(maskLandsat)} -- Maschera le nuvole e le ombre.
-    \item \textbf{median()} -- Calcola il composito mediano delle immagini.
-    \item \textbf{clip()} -- Ritaglia le immagini esattamente sull'area della Toscana.
-    \item \textbf{Map.addLayer()} -- Visualizza i layer RGB nel pannello GEE.
-    \item \textbf{Export.image.toDrive()} -- Esporta le immagini GeoTIFF (RGB + NIR).
+    \item \code{ee.ImageCollection()} -- Carica le immagini satellitari Landsat.
+    \item \code{filterDate()} -- Seleziona un intervallo temporale di acquisizione.
+    \item \code{filterBounds()} -- Ritaglia l'area di interesse (AOI, Toscana).
+    \item \code{map(maskLandsat)} -- Maschera le nuvole e le ombre.
+    \item \code{median()} -- Calcola il composito mediano delle immagini.
+    \item \code{clip()} -- Ritaglia le immagini esattamente sull'area della Toscana.
+    \item \code{Map.addLayer()} -- Visualizza i layer RGB nel pannello GEE.
+    \item \code{Export.image.toDrive()} -- Esporta le immagini GeoTIFF (RGB + NIR).
 \end{itemize}
 \end{frame}
 
 % --------------------------------------
 % SLIDE 4 - FUNZIONI USATE IN R
 % --------------------------------------
-\begin{frame}{Funzioni principali di R}
+\begin{frame}[fragile]{Funzioni principali di R}
 \begin{itemize}
-    \item \textbf{terra::rast()} -- Importazione dei raster GeoTIFF.
-    \item \textbf{terra::plotRGB()} -- Visualizzazione delle immagini RGB.
-    \item \textbf{par(mfrow=...)} -- Creazione di multiframe per il confronto di più immagini.
-    \item \textbf{terra::values()} -- Estrazione dei valori numerici dai raster.
-    \item \textbf{viridis::viridis()} -- Generazione delle palette di colori per le mappe.
-    \item \textbf{ggplot2::ggplot()} -- Creazione di grafici di distribuzione dei valori NDVI.
-    \item \textbf{geom_density()} -- Visualizzazione della densità dei valori NDVI.
-    \item \textbf{theme_minimal()} -- Impostazione di un tema pulito per i grafici.
+    \item \code{terra::rast()} -- Importazione dei raster GeoTIFF.
+    \item \code{terra::plotRGB()} -- Visualizzazione delle immagini RGB.
+    \item \code{par(mfrow=...)} -- Creazione di multiframe per il confronto di più immagini.
+    \item \code{terra::values()} -- Estrazione dei valori numerici dai raster.
+    \item \code{viridis::viridis()} -- Generazione delle palette di colori per le mappe.
+    \item \code{ggplot2::ggplot()} -- Creazione di grafici di distribuzione dei valori NDVI.
+    \item \code{geom_density()} -- Visualizzazione della densità dei valori NDVI.
+    \item \code{theme_minimal()} -- Impostazione di un tema pulito per i grafici.
 \end{itemize}
 \end{frame}
 
@@ -398,11 +409,10 @@ im.multiframe(class_2000, class_2010, class_2020,
 % --------------------------------------
 \begin{frame}{Immagini RGB della Toscana}
 \begin{center}
-\includegraphics[width=0.32\linewidth]{rgb_tuscany_2000_1999_2001.png}
-\includegraphics[width=0.32\linewidth]{rgb_tuscany_2010_2009_2011.png}
-\includegraphics[width=0.32\linewidth]{rgb_tuscany_2020_2019_2021.png}
+
+\includegraphics[width=0.80\linewidth]{Toscana_RGB.png}
 \end{center}
-\caption{Immagini RGB Toscana — Landsat (2000, 2010, 2020)}
+\footnotesize{Immagini RGB Toscana — Landsat (2000, 2010, 2020)}
 \end{frame}
 
 % --------------------------------------
@@ -410,11 +420,9 @@ im.multiframe(class_2000, class_2010, class_2020,
 % --------------------------------------
 \begin{frame}{NDVI calcolato in R}
 \begin{center}
-\includegraphics[width=0.32\linewidth]{ndvi_tuscany_2000.png}
-\includegraphics[width=0.32\linewidth]{ndvi_tuscany_2010.png}
-\includegraphics[width=0.32\linewidth]{ndvi_tuscany_2020.png}
+\includegraphics[width=0.90\linewidth]{ndvi_tuscany_2000.png}
 \end{center}
-\caption{Mappe NDVI Toscana — Calcolate in R}
+\footnotesize{Mappe NDVI Toscana — Calcolate in R}
 \end{frame}
 
 % --------------------------------------
@@ -422,9 +430,9 @@ im.multiframe(class_2000, class_2010, class_2020,
 % --------------------------------------
 \begin{frame}{Distribuzione NDVI per anno}
 \begin{center}
-\includegraphics[width=0.8\linewidth]{ndvi_density_overlay.png}
+\includegraphics[width=0.90\linewidth]{ndvi_density_overlay.png}
 \end{center}
-\caption{Distribuzione dei valori NDVI (2000, 2010, 2020)}
+\footnotesize{Distribuzione dei valori NDVI (2000, 2010, 2020)}
 \end{frame}
 
 % --------------------------------------
@@ -433,7 +441,7 @@ im.multiframe(class_2000, class_2010, class_2020,
 \begin{frame}{Conclusioni}
 \begin{itemize}
     \item Tra il 2000 e il 2020 si osserva una variazione della copertura vegetale in Toscana.
-    \item L'uso combinato di \textbf{GEE} e \textbf{R} permette di gestire grandi dataset e calcolare indici complessi.
+    \item L'uso combinato di \code{GEE} e \code{R} permette di gestire grandi dataset e calcolare indici complessi.
     \item Il calcolo dell'NDVI in R consente un'analisi flessibile e riproducibile.
     \item La rappresentazione tramite grafici e mappe rende immediata l'interpretazione dei risultati.
 \end{itemize}
