@@ -328,7 +328,6 @@ im.multiframe(class_2000, class_2010, class_2020,
                        "Classificazione 2010",
                        "Classificazione 2020"))  # imageRy::im.multiframe() → mostra tutte le mappe insieme
 
-
 ```
 
 
