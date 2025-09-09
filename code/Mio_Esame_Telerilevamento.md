@@ -116,6 +116,7 @@ Export.image.toDrive({
   maxPixels: 1e13
 });
 ```
+>Ti piacerebbe approfondire le tue conoscenze sulla [SATELLITI LANDSAT]?([https://dataspace.copernicus.eu/explore-data/data-collections/sentinel-data/sentinel-2](https://landsat.gsfc.nasa.gov/))
 <img width="1914" height="865" alt="gee exam" src="https://github.com/user-attachments/assets/7d75d080-c6b0-4ad0-ab28-44e10b4b9692" />
 
 ## **2. Script R — Analisi NDVI e visualizzazioni**
