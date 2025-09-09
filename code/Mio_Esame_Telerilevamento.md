@@ -129,6 +129,9 @@ Export.image.toDrive({
 # ----------------------------
 # 2.1 Caricamento pacchetti 
 # ----------------------------
+
+# Di seguito i pacchetti e le relative funzioni utilizzate in questo script
+
 library(imageRy)   # imageRy::im.plot()
 library(terra)     # terra::rast(), terra::values(), terra::plot()
 library(viridis)   # viridis::scale_fill_viridis()
@@ -137,8 +140,15 @@ library(ggplot2)   # ggplot2::ggplot(), geom_density(), theme_minimal()
 # ----------------------------
 # 2.2 Importazione immagini RGB+NIR (terra::rast)
 # ----------------------------
+
 getwd() # per verificare dapprima la working directory dove vanno spostate le immagini
+
 "C:/Users/bobby/OneDrive/Documents" # nel mio caso
+
+# Di seguito importo le immagini ottenute da Google Earth Engine
+# Oltre alle bande dei colori reali (RGB) viene importata anche la banda NIR (near infra red)
+# La banda NIR ci consentirà dopo di calcolare l'Indice di Vegetazione Normalizzato (NDVI)
+
 toscana_2000 <- rast("rgbn_tuscany_2000_1999_2001.tif")  # terra::rast()
 toscana_2010 <- rast("rgbn_tuscany_2010_2009_2011.tif")  # terra::rast()
 toscana_2020 <- rast("rgbn_tuscany_2020_2019_2021.tif")  # terra::rast()
@@ -146,6 +156,9 @@ toscana_2020 <- rast("rgbn_tuscany_2020_2019_2021.tif")  # terra::rast()
 # ----------------------------
 # 2.3 Visualizzazione RGB a confronto (par + terra::plotRGB)
 # ----------------------------
+
+# Di seguito le funzioni per ottenere le immagini con colori naturali (RGB) dei 3 periodi di riferimento
+
 par(mfrow = c(1,3))                                   # base::par()
 plotRGB(toscana_2000, r=1, g=2, b=3, stretch="lin")   # terra::plotRGB()
 title("RGB Toscana 2000")                             # base::title()
@@ -159,6 +172,12 @@ title("RGB Toscana 2020")
 ```r
 # ----------------------------
 # 2.4 Calcolo NDVI in R (terra::)
+
+# Procediamo adesso col calcolo del Normalized Difference Vegetation Index (NDVI)
+# I satelliti Landsat coinvolti in queste funzioni sono 2
+# Landsat 5 per il 2000 ed il 2010
+# Landsat 8 per il 2020
+
 # Landsat 5 (2000, 2010): banda NIR = SR_B4 (4° banda export)
 # Landsat 8 (2020): banda NIR = SR_B5 (4° banda export)
 # ----------------------------
@@ -178,26 +197,75 @@ plot(ndvi_2020, col=viridis(100), main="NDVI 2020")
 
 ```r
 # ----------------------------
-# 2.6 Estrazione valori NDVI (terra::values, base::is.na)
+# 2.6 Estrazione valori NDVI (terra::values, base::head, base::is.na)
 # ----------------------------
+
+# La funzione values() serve per estrarre tutti i valori numerici dei pixel da un raster, ad esempio i valori NDVI calcolati
+
 v2000 <- values(ndvi_2000) ; v2000 <- v2000[!is.na(v2000)]
 v2010 <- values(ndvi_2010) ; v2010 <- v2010[!is.na(v2010)]
 v2020 <- values(ndvi_2020) ; v2020 <- v2020[!is.na(v2020)]
 
+# Osserviamo a questo punto gli output con la funzione head()
+# Numeri compresi normalmente tra -1 e 1, dove valori vicini a 1 indicano vegetazione molto densa, 0 aree prive di vegetazione e valori negativi corrispondono di solito ad acqua, neve o superfici artificiali
+
+head(v2000)
+0.3160424 0.2591038 0.2591038 0.2582499 0.2751155 0.2886932
+head(v2010)
+0.3596130 0.3521736 0.3521736 0.3488576 0.3711064 0.3805258
+head(v2020)
+0.3791036 0.3719755 0.3719755 0.3742538 0.3773779 0.3766964
+
+# Questa funzione mostra solo i primi 6 valori tra tutti i valori dei pixel NDVI estratti dal raster
+
 # ----------------------------
 # 2.7 Analisi statistica (base::summary, base::mean, base::sd)
 # ----------------------------
+
 summary(v2000)
+# risultato = Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+             -0.2249  0.2031  0.2797  0.2703  0.3427  0.5498 
+
 summary(v2010)
+ # risutato = Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+             -0.2268  0.2115  0.2825  0.2716  0.3408  0.5420 
+
 summary(v2020)
+# risultato =  Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+              -0.2904  0.2508  0.3125  0.2993  0.3626  0.5670 
+
+# La funzione summary() calcola e mostra le statistiche descrittive di valori NDVI
+# Essa usa tutti i valori estratti con la funzione values(), non solo i primi mostrati da head()
+# Min. → valore minimo NDVI
+# 1st Qu. → primo quartile
+# Median → mediana
+# Mean → media
+# 3rd Qu. → terzo quartile
+# Max. → valore massimo NDVI
 
 mean(v2000); sd(v2000)
+#risultati di seguito
+0.2703031
+0.09904466
+
 mean(v2010); sd(v2010)
+#risultati di seguito
+0.2716097
+0.09357948
+
 mean(v2020); sd(v2020)
+#risultati di seguito
+0.2992663
+0.09118385
+
+# I valori ottenuti con la funzione mean() corrispondono alla media aritmetica di tutti i valori NDVI, cioè alla media della vegetazione per l’intera area della Toscana
 
 # ----------------------------
 # 2.8 Distribuzione NDVI con ggplot2
 # ----------------------------
+
+# La funzione data.frame() crea una tabella di dati con i valori NDVI estratti da v2000, v2010, v2020
+
 df_ndvi <- data.frame(
   NDVI = c(v2000, v2010, v2020),
   Anno = rep(c("2000","2010","2020"),
@@ -210,6 +278,58 @@ ggplot(df_ndvi, aes(x=NDVI, fill=Anno)) +      # ggplot2::ggplot()
   labs(title="Distribuzione NDVI Toscana (2000,2010,2020)",
        x="NDVI", y="Densità") +
   theme_minimal()                             # ggplot2::theme_minimal()
+
+# La funzione ggplot() (ggplot2) → inizializza il grafico, specificando dati e variabili estetiche
+# La funzione geom_density() (ggplot2) → disegna la curva di densità per visualizzare la distribuzione dei valori NDVI.
+# La funzione labs() (ggplot2) → aggiunge titolo, etichette degli assi e legenda al grafico
+# La funzione theme_minimal() (ggplot2) → applica un tema pulito e minimale al grafico
+# La funzione ggtitle() (ggplot2) → imposta un titolo principale per il grafico
+# La funzione scale_color_manual() (ggplot2) → assegna colori personalizzati alle curve NDVI di ciascun anno
+```
+<img width="1386" height="564" alt="ggplot" src="https://github.com/user-attachments/assets/f0fc7459-90e5-49ec-9e0a-95da5c911092" />
+
+```r
+
+# ============================================================
+# CLASSIFICAZIONE NON SUPERVISIONATA DELLA COPERTURA DEL SUOLO
+# Anni: 2000, 2010, 2020
+# ============================================================
+
+# La classificazione non supervisionata è un metodo che divide automaticamente i pixel dell’immagine in gruppi (classi) solo in base alla somiglianza spettrale dei valori delle bande, senza usare dati esterni o campioni scelti dall’utente
+
+# In pratica:
+
+   # L’algoritmo analizza i valori RGB+NIR dell’immagine.
+
+   # Raggruppa i pixel che hanno spettri simili in un certo numero di classi (nclass).
+
+   # Tu non indichi prima cosa sia vegetazione, acqua o urbano: è l’algoritmo che trova pattern ricorrenti.
+
+# Il risultato è una mappa tematica con classi cromatiche, che dopo possiamo interpretare visivamente (es. "classe 1 ≈ vegetazione densa", "classe 2 ≈ suolo nudo", ecc.).
+
+# ---- Classificazione anno 2000 ----
+class_2000 <- im.classify(toscana_2000, nclass = 5)   # imageRy::im.classify()
+im.plot(class_2000)  # imageRy::im.plot() visualizza la mappa tematica 2000
+
+# ---- Classificazione anno 2010 ----
+class_2010 <- im.classify(toscana_2010, nclass = 5)   # imageRy::im.classify()
+im.plot(class_2010)  # imageRy::im.plot() visualizza la mappa tematica 2010
+
+# ---- Classificazione anno 2020 ----
+class_2020 <- im.classify(toscana_2020, nclass = 5)   # imageRy::im.classify()
+im.plot(class_2020)  # imageRy::im.plot() visualizza la mappa tematica 2020
+
+# ============================================================
+# VISUALIZZAZIONE MULTIFRAME DELLE TRE CLASSIFICAZIONI
+# ============================================================
+
+im.multiframe(class_2000, class_2010, class_2020, 
+              nrow = 1, ncol = 3, 
+              main = c("Classificazione 2000", 
+                       "Classificazione 2010", 
+                       "Classificazione 2020"))  # imageRy::im.multiframe()
+
+
 ```
 
 
