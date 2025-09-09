@@ -332,6 +332,9 @@ im.multiframe(class_2000, class_2010, class_2020,
 
 
 ## **3. Script LaTeX per presentazione su Overleaf**
+
+[Apri la mia presentazione LaTeX su Overleaf](https://www.overleaf.com/project/68c069dce98c3ff6c016a54e)
+
 ```latex
 \documentclass{beamer}
 \usetheme{Berlin} % tema che evita gli Overfull visti con Madrid
@@ -361,7 +364,19 @@ im.multiframe(class_2000, class_2010, class_2020,
 \frame{\titlepage}
 
 % --------------------------------------
-% SLIDE 2 - OBIETTIVI
+% SLIDE 2 - ABSTRACT
+% --------------------------------------
+
+\begin{frame}{Abstract}
+\begin{block}{Sintesi del progetto}
+In questo lavoro analizziamo l'evoluzione della \textbf{copertura vegetale in Toscana} tra il 2000 e il 2020 utilizzando immagini satellitari \textbf{Landsat} elaborate tramite \textbf{Google Earth Engine (GEE)} e \textbf{R}.  
+L'obiettivo principale è individuare le variazioni di vegetazione attraverso il calcolo dell'indice \textbf{NDVI} e la produzione di mappe tematiche e grafici statistici.  
+L'integrazione tra \textbf{GEE} e \textbf{R} permette di gestire grandi quantità di dati e realizzare un'analisi accurata, riproducibile e facilmente interpretabile.
+\end{block}
+\end{frame}
+
+% --------------------------------------
+% SLIDE 3 - OBIETTIVI
 % --------------------------------------
 \begin{frame}{Obiettivi del lavoro}
 \begin{itemize}
@@ -373,9 +388,9 @@ im.multiframe(class_2000, class_2010, class_2020,
 \end{frame}
 
 % --------------------------------------
-% SLIDE 3 - FUNZIONI USATE IN GEE
+% SLIDE 4 - FUNZIONI USATE IN GEE
 % --------------------------------------
-\begin{frame}[fragile]{Funzioni principali di Google Earth Engine (GEE)}
+\begin{frame}[fragile]{Materiali e metodi: Funzioni principali di Google Earth Engine (GEE)}
 \begin{itemize}
     \item \code{ee.ImageCollection()} -- Carica le immagini satellitari Landsat.
     \item \code{filterDate()} -- Seleziona un intervallo temporale di acquisizione.
@@ -389,9 +404,9 @@ im.multiframe(class_2000, class_2010, class_2020,
 \end{frame}
 
 % --------------------------------------
-% SLIDE 4 - FUNZIONI USATE IN R
+% SLIDE 5 - FUNZIONI USATE IN R
 % --------------------------------------
-\begin{frame}[fragile]{Funzioni principali di R}
+\begin{frame}[fragile]{Materiali e metodi: Funzioni principali di R}
 \begin{itemize}
     \item \code{terra::rast()} -- Importazione dei raster GeoTIFF.
     \item \code{terra::plotRGB()} -- Visualizzazione delle immagini RGB.
@@ -405,9 +420,9 @@ im.multiframe(class_2000, class_2010, class_2020,
 \end{frame}
 
 % --------------------------------------
-% SLIDE 5 - IMMAGINI RGB
+% SLIDE 6 - IMMAGINI RGB
 % --------------------------------------
-\begin{frame}{Immagini RGB della Toscana}
+\begin{frame}{Risultati: Immagini RGB della Toscana}
 \begin{center}
 
 \includegraphics[width=0.80\linewidth]{Toscana_RGB.png}
@@ -416,9 +431,9 @@ im.multiframe(class_2000, class_2010, class_2020,
 \end{frame}
 
 % --------------------------------------
-% SLIDE 6 - MAPPE NDVI
+% SLIDE 7 - MAPPE NDVI
 % --------------------------------------
-\begin{frame}{NDVI calcolato in R}
+\begin{frame}{Risultati: NDVI calcolato in R}
 \begin{center}
 \includegraphics[width=0.90\linewidth]{ndvi_tuscany_2000.png}
 \end{center}
@@ -426,9 +441,9 @@ im.multiframe(class_2000, class_2010, class_2020,
 \end{frame}
 
 % --------------------------------------
-% SLIDE 7 - DISTRIBUZIONE NDVI
+% SLIDE 8 - DISTRIBUZIONE NDVI
 % --------------------------------------
-\begin{frame}{Distribuzione NDVI per anno}
+\begin{frame}{Risultati: Distribuzione NDVI per anno}
 \begin{center}
 \includegraphics[width=0.90\linewidth]{ndvi_density_overlay.png}
 \end{center}
@@ -436,7 +451,7 @@ im.multiframe(class_2000, class_2010, class_2020,
 \end{frame}
 
 % --------------------------------------
-% SLIDE 8 - CONCLUSIONI
+% SLIDE 9 - CONCLUSIONI
 % --------------------------------------
 \begin{frame}{Conclusioni}
 \begin{itemize}
@@ -444,6 +459,17 @@ im.multiframe(class_2000, class_2010, class_2020,
     \item L'uso combinato di \code{GEE} e \code{R} permette di gestire grandi dataset e calcolare indici complessi.
     \item Il calcolo dell'NDVI in R consente un'analisi flessibile e riproducibile.
     \item La rappresentazione tramite grafici e mappe rende immediata l'interpretazione dei risultati.
+\end{itemize}
+\end{frame}
+
+% --------------------------------------
+% SLIDE 10 - LINK IPERTESTUALI UTILI
+% --------------------------------------
+
+\begin{frame}{Link Utili}
+\begin{itemize}
+    \item \href{https://landsat.gsfc.nasa.gov/}{\textbf{\underline{Per saperne di più sui satelliti Landsat clicca qui}}}
+    \item \href{https://github.com/bernardoborri/telerilevamento_2025/blob/main/code/Mio_Esame_Telerilevamento.md}{\textbf{\underline{Per consultare tutto il codice R clicca qui}}}
 \end{itemize}
 \end{frame}
 
