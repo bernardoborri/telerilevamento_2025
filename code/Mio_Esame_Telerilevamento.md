@@ -132,10 +132,12 @@ Export.image.toDrive({
 
 # Di seguito i pacchetti e le relative funzioni utilizzate in questo script
 
-library(imageRy)   # imageRy::im.multiframe(), imageRy::im.classify(), imageRy::im.plot()
 library(terra)     # terra::rast(), terra::values(), terra::plot()
 library(viridis)   # viridis::scale_fill_viridis()
 library(ggplot2)   # ggplot2::ggplot(), geom_density(), theme_minimal()
+library(patchwork)   # patchwork::wrap_plots()
+library(imageRy)   # imageRy::im.multiframe()
+# più alcune funzioni base di R
 
 # ----------------------------
 # 2.2 Importazione immagini RGB+NIR (terra::rast)
