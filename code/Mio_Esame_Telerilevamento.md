@@ -290,43 +290,7 @@ ggplot(df_ndvi, aes(x=NDVI, fill=Anno)) +      # ggplot2::ggplot()
 
 ```r
 
-# ------------------------------------------------------------
-# CLASSIFICAZIONE NON SUPERVISIONATA DELLA COPERTURA DEL SUOLO
-# Anni: 2000, 2010, 2020
-# ------------------------------------------------------------
 
-# La classificazione non supervisionata è un metodo che divide automaticamente i pixel dell’immagine in gruppi (classi) solo in base alla somiglianza spettrale dei valori delle bande, senza usare dati esterni o campioni scelti dall’utente
-
-# In pratica:
-   # L’algoritmo analizza i valori RGB+NIR dell’immagine
-   # Raggruppa i pixel che hanno spettri simili in un certo numero di classi (nclass)
-   # Non siamo noi ad indicare prima cosa sia vegetazione, acqua o urbano: è l’algoritmo che trova pattern ricorrenti
-# Il risultato è una mappa tematica con classi cromatiche, che dopo possiamo interpretare visivamente (es. "classe 1 ≈ vegetazione densa", "classe 2 ≈ suolo nudo", ecc.)
-
-# ---- Riduzione della risoluzione delle immagini per ottimizzare la memoria ----
-toscana_2000_small <- aggregate(toscana_2000, fact = 4)  # terra::aggregate() → riduce il numero di pixel
-toscana_2010_small <- aggregate(toscana_2010, fact = 4)  # terra::aggregate() → riduce il numero di pixel
-toscana_2020_small <- aggregate(toscana_2020, fact = 4)  # terra::aggregate() → riduce il numero di pixel
-
-# ---- Classificazione anno 2000 ----
-class_2000 <- im.classify(toscana_2000_small)  # imageRy::im.classify() → raggruppa i pixel in classi simili
-im.plot(class_2000)                            # imageRy::im.plot() → mostra la mappa tematica classificata 2000
-
-# ---- Classificazione anno 2010 ----
-class_2010 <- im.classify(toscana_2010_small)  # imageRy::im.classify() → raggruppa i pixel in classi simili
-im.plot(class_2010)                            # imageRy::im.plot() → mostra la mappa tematica classificata 2010
-
-# ---- Classificazione anno 2020 ----
-class_2020 <- im.classify(toscana_2020_small)  # imageRy::im.classify() → raggruppa i pixel in classi simili
-im.plot(class_2020)                            # imageRy::im.plot() → mostra la mappa tematica classificata 2020
-
-# Con la funzione im.multiframe creo un'unica immagine delle 3 classificazioni una accanto all'altra
-
-im.multiframe(class_2000, class_2010, class_2020,
-              nrow = 1, ncol = 3,
-              main = c("Classificazione 2000",
-                       "Classificazione 2010",
-                       "Classificazione 2020"))  # imageRy::im.multiframe() → mostra tutte le mappe insieme
 
 ```
 
