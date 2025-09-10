@@ -290,13 +290,6 @@ ggplot(df_ndvi, aes(x=NDVI, fill=Anno)) +      # ggplot2::ggplot()
 ```
 <img width="1386" height="564" alt="ggplot" src="https://github.com/user-attachments/assets/f0fc7459-90e5-49ec-9e0a-95da5c911092" />
 
-```r
-
-
-
-```
-
-
 ## **3. Script LaTeX per presentazione su Overleaf**
 
 [Clicca qui per aprire la mia presentazione LaTeX su Overleaf](https://www.overleaf.com/project/68c069dce98c3ff6c016a54e)
