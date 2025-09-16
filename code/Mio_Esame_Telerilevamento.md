@@ -292,7 +292,7 @@ ggplot(df_ndvi, aes(x=NDVI, fill=Anno)) +      # ggplot2::ggplot()
 
 ## **3. Script LaTeX per presentazione su Overleaf**
 
-[Clicca qui per aprire la mia presentazione LaTeX su Overleaf](https://www.overleaf.com/project/68c069dce98c3ff6c016a54e)
+[Clicca qui per aprire la mia presentazione LaTeX su Overleaf](https://www.overleaf.com/read/vdqhfrkkwrjy#590115)
 
 ```latex
 \documentclass{beamer}
