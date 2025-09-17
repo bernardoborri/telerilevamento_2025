@@ -135,7 +135,6 @@ Export.image.toDrive({
 library(terra)     # terra::rast(), terra::values(), terra::plot()
 library(viridis)   # viridis::scale_fill_viridis()
 library(ggplot2)   # ggplot2::ggplot(), geom_density(), theme_minimal()
-library(patchwork)   # patchwork::wrap_plots()
 
 # più alcune funzioni base di R
 
@@ -168,6 +167,8 @@ plotRGB(toscana_2010, r=1, g=2, b=3, stretch="lin")
 title("RGB Toscana 2010")
 plotRGB(toscana_2020, r=1, g=2, b=3, stretch="lin")
 title("RGB Toscana 2020")
+# la sigla "lin" nella funzione indica che i colori vengono riscalati in modo proporzionale per migliorare la visibilità
+
 ```
 <img width="1400" height="698" alt="toscana paar" src="https://github.com/user-attachments/assets/3c39f0e9-a6e8-4a90-8367-b85f44d9d8cb" />
 
@@ -182,6 +183,8 @@ title("RGB Toscana 2020")
 
 # Landsat 5 (2000, 2010): banda NIR = SR_B4 (4° banda export)
 # Landsat 8 (2020): banda NIR = SR_B5 (4° banda export)
+# Vedi codice di esportazione GEE
+
 # ----------------------------
 ndvi_2000 <- (toscana_2000[[4]] - toscana_2000[[1]]) / (toscana_2000[[4]] + toscana_2000[[1]])  # terra::
 ndvi_2010 <- (toscana_2010[[4]] - toscana_2010[[1]]) / (toscana_2010[[4]] + toscana_2010[[1]])  # terra::
@@ -190,7 +193,7 @@ ndvi_2020 <- (toscana_2020[[4]] - toscana_2020[[1]]) / (toscana_2020[[4]] + tosc
 # ----------------------------
 # 2.5 Visualizzazione NDVI in multiframe
 # ----------------------------
-par(mfrow = c(1,3))                                # base::par()
+par(mfrow = c(1,3))                                 # base::par()
 plot(ndvi_2000, col=viridis(100), main="NDVI 2000") # terra::plot(), viridis::viridis()
 plot(ndvi_2010, col=viridis(100), main="NDVI 2010")
 plot(ndvi_2020, col=viridis(100), main="NDVI 2020")
@@ -212,11 +215,11 @@ v2020 <- values(ndvi_2020) ; v2020 <- v2020[!is.na(v2020)]
 # Numeri compresi normalmente tra -1 e 1, dove valori vicini a 1 indicano vegetazione molto densa, 0 aree prive di vegetazione e valori negativi corrispondono di solito ad acqua, neve o superfici artificiali
 
 head(v2000)
-0.3160424 0.2591038 0.2591038 0.2582499 0.2751155 0.2886932
+# output = 0.3160424 0.2591038 0.2591038 0.2582499 0.2751155 0.2886932
 head(v2010)
-0.3596130 0.3521736 0.3521736 0.3488576 0.3711064 0.3805258
+# output = 0.3596130 0.3521736 0.3521736 0.3488576 0.3711064 0.3805258
 head(v2020)
-0.3791036 0.3719755 0.3719755 0.3742538 0.3773779 0.3766964
+# output = 0.3791036 0.3719755 0.3719755 0.3742538 0.3773779 0.3766964
 
 # Questa funzione mostra solo i primi 6 valori tra tutti i valori dei pixel NDVI estratti dal raster
 
@@ -225,15 +228,15 @@ head(v2020)
 # ----------------------------
 
 summary(v2000)
-# risultato = Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+# output = Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
              -0.2249  0.2031  0.2797  0.2703  0.3427  0.5498 
 
 summary(v2010)
- # risutato = Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ # output = Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
              -0.2268  0.2115  0.2825  0.2716  0.3408  0.5420 
 
 summary(v2020)
-# risultato =  Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+# output =  Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
               -0.2904  0.2508  0.3125  0.2993  0.3626  0.5670 
 
 # La funzione summary() calcola e mostra le statistiche descrittive di valori NDVI
@@ -246,19 +249,19 @@ summary(v2020)
 # Max. → valore massimo NDVI
 
 mean(v2000); sd(v2000)
-#risultati di seguito
-0.2703031
-0.09904466
+# output di seguito
+# 0.2703031
+# 0.09904466
 
 mean(v2010); sd(v2010)
-#risultati di seguito
-0.2716097
-0.09357948
+# output di seguito
+# 0.2716097
+# 0.09357948
 
 mean(v2020); sd(v2020)
-#risultati di seguito
-0.2992663
-0.09118385
+# output di seguito
+# 0.2992663
+# 0.09118385
 
 # I valori ottenuti con la funzione mean() corrispondono alla media aritmetica di tutti i valori NDVI, cioè alla media della vegetazione per l’intera area della Toscana
 
